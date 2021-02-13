@@ -1,7 +1,7 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: %i[ show edit update destroy ]
-  has_many :chats, dependent: :destroy,
-                           inverse_of: :applications
+  before_action :set_application, only: %i[ show edit update ]
+  #has_many :chats, dependent: :destroy,
+  #                         inverse_of: :applications
 
   # GET /applications or /applications.json
   def index
@@ -50,13 +50,13 @@ class ApplicationsController < ApplicationController
   end
 
   # DELETE /applications/1 or /applications/1.json
-  def destroy
-    @application.destroy
-    respond_to do |format|
-      format.html { redirect_to applications_url, notice: "Application was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+#  def destroy
+#    @application.destroy
+#    respond_to do |format|
+#      format.html { redirect_to applications_url, notice: "Application was successfully destroyed." }
+#      format.json { head :no_content }
+#    end
+#  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
