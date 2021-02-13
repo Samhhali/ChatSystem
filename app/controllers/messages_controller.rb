@@ -1,7 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
-  belongs_to :user
-  belongs_to :chats, inverse_of: :messages
+  
   # GET /messages or /messages.json
   def index
     @messages = Message.all

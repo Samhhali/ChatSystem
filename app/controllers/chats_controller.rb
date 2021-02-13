@@ -1,7 +1,6 @@
 class ChatsController < ApplicationController
   before_action :set_chat, only: %i[ show edit update destroy ]
-  has_many :messages, dependent: :destroy,
-                           inverse_of: :chats
+  
   # GET /chats or /chats.json
   def index
     @chats = Chat.all

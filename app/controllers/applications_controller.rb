@@ -1,7 +1,6 @@
 class ApplicationsController < ApplicationController
   before_action :set_application, only: %i[ show edit update ]
-  #has_many :chats, dependent: :destroy,
-  #                         inverse_of: :applications
+
 
   # GET /applications or /applications.json
   def index
