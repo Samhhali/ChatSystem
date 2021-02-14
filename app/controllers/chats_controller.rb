@@ -17,26 +17,34 @@ class ChatsController < ApplicationController
   end
 
   # GET /chats/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /chats or /chats.json
   def create
-    @chat = Chat.new(chat_params)
+    #@chat = Chat.new(chat_params)
+    @chat = Chat.get(current_user.id, params[:user_id])
+
+    add_to_chats unless chated?
 
     respond_to do |format|
-      if @chat.save
-        format.html { redirect_to @chat, notice: "Chat was successfully created." }
-        format.json { render :show, status: :created, location: @chat }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @chat.errors, status: :unprocessable_entity }
-      end
+      format.js
+    end
+  end
+
+  #removes the requested chat_id from the session and closes a window on the front-end.
+  def close
+    @chat = Chat.find(params[:id])
+
+    session[:chats].delete(@chat.id)
+
+    respond_to do |format|
+      format.js
     end
   end
 
   # PATCH/PUT /chats/1 or /chats/1.json
-  def update
+=beging  def update
     respond_to do |format|
       if @chat.update(chat_params)
         format.html { redirect_to @chat, notice: "Chat was successfully updated." }
@@ -56,13 +64,16 @@ class ChatsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  =end
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_chat
-      @chat = Chat.find(params[:id])
+    def add_to_chats
+      session[:chats] || []
+      session[:chats] << @chat.id
     end
-
+    def chated
+      session[:chats].include?(@chat.id)
+    end
     # Only allow a list of trusted parameters through.
     def chat_params
       params.require(:chat).permit(:number, :application_id)
