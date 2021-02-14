@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   protect_from_forgery with: :exception
 
-  helper_method :current_user
+=begin  helper_method :current_user
   def current_user
     return @current_user if @current_user.present?
     if session[:user_id].present?
@@ -14,4 +14,5 @@ class ApplicationController < ActionController::Base
       @current_user
     end
   end
+=end
 end
