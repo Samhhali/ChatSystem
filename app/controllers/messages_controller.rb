@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
-  
+
   # GET /messages or /messages.json
   def index
     @messages = Message.all
@@ -22,6 +22,7 @@ class MessagesController < ApplicationController
   # POST /messages or /messages.json
   def create
     @message = Message.new(message_params)
+    @message.user = current 
 
     respond_to do |format|
       if @message.save
